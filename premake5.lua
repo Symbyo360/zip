@@ -1,7 +1,7 @@
-zip = path.getabsolute(".")
+zip_path = path.getabsolute(".")
 
 function use_zip()
-	includedirs "%{zip}/src"
+	includedirs "%{zip_path}/src"
 	links "zip"
 end
 
