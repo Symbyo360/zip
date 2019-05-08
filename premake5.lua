@@ -1,13 +1,17 @@
-zip_path = path.getabsolute(".")
+libzip = {}
+libzip.path = path.getabsolute(".")
 
-function use_zip()
-	includedirs "%{zip_path}/src"
+function libzip.use()
+	includedirs "%{libzip.path}/src"
 	links "zip"
+
+	filter "platforms:shared"
+		defines { "ZIP_DLL=0" }
+	filter {}
 end
 
 project "zip"
 	language "C"
-	kind "SharedLib"
 
 	files
 	{
@@ -20,7 +24,11 @@ project "zip"
 		"src"
 	}
 
-	defines
-	{
-		"ZIP_DLL"
-	}
+	filter "platforms:static"
+		kind "StaticLib"
+
+	filter "platforms:shared"
+		kind "SharedLib"
+		defines { "ZIP_DLL=1" }
+
+return libzip
