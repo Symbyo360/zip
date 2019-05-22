@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 2.8)
-project(zip)
-enable_language(C)
+cmake_minimum_required(VERSION 3.9)
+project(zip VERSION 0.1.14 LANGUAGES C)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 if (MSVC)
@@ -18,3 +17,17 @@ endif (MSVC)
 set(SRC src/miniz.h src/zip.h src/zip.c)
 add_library(${PROJECT_NAME} ${SRC})
 target_include_directories(${PROJECT_NAME} INTERFACE src)
+
+# generate exports header file
+include(GenerateExportHeader)
+generate_export_header(zip
+	EXPORT_FILE_NAME ${CMAKE_CURRENT_SOURCE_DIR}/src/Exports.h
+)
+
+# output directory
+set_target_properties(zip
+	PROPERTIES
+	ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
