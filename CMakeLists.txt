@@ -18,6 +18,9 @@ set(SRC src/miniz.h src/zip.h src/zip.c)
 add_library(${PROJECT_NAME} ${SRC})
 target_include_directories(${PROJECT_NAME} INTERFACE src)
 
+# make it reflect the same structure as the one on disk
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SRC})
+
 # generate exports header file
 include(GenerateExportHeader)
 generate_export_header(zip
