@@ -26,11 +26,3 @@ include(GenerateExportHeader)
 generate_export_header(zip
 	EXPORT_FILE_NAME ${CMAKE_CURRENT_SOURCE_DIR}/src/Exports.h
 )
-
-# output directory
-set_target_properties(zip
-	PROPERTIES
-	ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-	LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-)
